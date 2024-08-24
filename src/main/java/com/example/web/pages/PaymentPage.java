@@ -67,6 +67,7 @@ public class PaymentPage {
                 .click();
 
         loadingSpinner.shouldNotBe(visible);
+        submitPaymentBtn.shouldNotBe(visible);
     }
 
     private Matcher parseOrderPrice() {
