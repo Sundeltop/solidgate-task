@@ -1,6 +1,7 @@
 package com.example.service;
 
 import com.example.dto.request.OrderIdJson;
+import com.example.dto.response.OrderStatusJson;
 import com.example.service.api.PayApi;
 import lombok.SneakyThrows;
 import retrofit2.Response;
@@ -19,13 +20,16 @@ public class PayService extends BaseService {
     }
 
     @SneakyThrows
-    public void checkOrderStatus(OrderIdJson orderId) {
+    public OrderStatusJson checkOrderStatus(String orderId) {
         final String merchant = configuration().publicKey();
+        final OrderIdJson payload = new OrderIdJson(orderId);
         final String signature = generateSignature(
-                merchant, mapper.writeValueAsString(orderId), configuration().secretKey());
+                merchant, mapper.writeValueAsString(payload), configuration().secretKey());
 
-        Response<Void> response = api.checkOrderStatus(merchant, signature, orderId).execute();
+        final Response<OrderStatusJson> response = api.checkOrderStatus(merchant, signature, payload).execute();
 
         assertThat(response.isSuccessful()).isTrue();
+
+        return response.body();
     }
 }
