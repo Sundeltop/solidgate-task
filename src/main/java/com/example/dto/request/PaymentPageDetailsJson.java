@@ -10,11 +10,11 @@ import lombok.Setter;
 @AllArgsConstructor
 @Getter
 @Setter
-public class PaymentPageDetails {
+public class PaymentPageDetailsJson {
 
     @JsonProperty("order")
-    private Order order;
+    private OrderJson order;
 
     @JsonProperty("page_customization")
-    private PageCustomization pageCustomization;
+    private PageCustomizationJson pageCustomization;
 }

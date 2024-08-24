@@ -1,7 +1,7 @@
 package com.example.service;
 
-import com.example.dto.request.PaymentPageDetails;
-import com.example.dto.response.PaymentPageResult;
+import com.example.dto.request.PaymentPageDetailsJson;
+import com.example.dto.response.PaymentPageResultJson;
 import com.example.service.api.PaymentApi;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.SneakyThrows;
@@ -30,12 +30,12 @@ public class PaymentService {
     }
 
     @SneakyThrows
-    public PaymentPageResult createPaymentPage(PaymentPageDetails paymentPageDetails) {
+    public PaymentPageResultJson createPaymentPage(PaymentPageDetailsJson paymentPageDetails) {
         final String merchant = configuration().publicKey();
         final String signature = generateSignature(
                 merchant, mapper.writeValueAsString(paymentPageDetails), configuration().secretKey());
 
-        final Response<PaymentPageResult> response =
+        final Response<PaymentPageResultJson> response =
                 api.createPaymentPage(merchant, signature, paymentPageDetails).execute();
 
         assertThat(response.isSuccessful()).isTrue();

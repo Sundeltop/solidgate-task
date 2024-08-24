@@ -1,7 +1,6 @@
 package com.example;
 
-import com.example.dto.request.PaymentPageDetails;
-import com.example.dto.response.PaymentPageResult;
+import com.example.dto.request.PaymentPageDetailsJson;
 import com.example.service.PaymentService;
 import com.example.testdata.TestDataStorage;
 import com.example.web.pages.PaymentPage;
@@ -21,11 +20,9 @@ public class PaymentPageTest {
 
     @Test(description = "Verify Payment page is created and order is successfully payed")
     public void verifyPaymentPageIsCreatedAndOrderIsSuccessfullyPayed() {
-        final PaymentPageDetails paymentPageDetails = testDataStorage.generatePaymentPageDetails();
+        final PaymentPageDetailsJson paymentPageDetails = testDataStorage.generatePaymentPageDetails();
 
-        final PaymentPageResult paymentPage = paymentService.createPaymentPage(paymentPageDetails);
-
-        open(paymentPage.url(), PaymentPage.class)
+        open(paymentService.createPaymentPage(paymentPageDetails).url(), PaymentPage.class)
                 .setCardNumber(VALID_CARD_NUMBER)
                 .setCardExpiry(getValidCardExpiry())
                 .setCvc(faker.number().digits(3))

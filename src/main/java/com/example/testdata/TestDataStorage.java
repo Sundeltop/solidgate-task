@@ -1,9 +1,9 @@
 package com.example.testdata;
 
-import com.example.dto.request.Order;
-import com.example.dto.request.Order.OrderMetadata;
-import com.example.dto.request.PageCustomization;
-import com.example.dto.request.PaymentPageDetails;
+import com.example.dto.request.OrderJson;
+import com.example.dto.request.OrderJson.OrderMetadataJson;
+import com.example.dto.request.PageCustomizationJson;
+import com.example.dto.request.PaymentPageDetailsJson;
 import com.github.javafaker.Faker;
 
 import java.util.List;
@@ -18,12 +18,12 @@ public class TestDataStorage {
         faker = new Faker();
     }
 
-    public PaymentPageDetails generatePaymentPageDetails() {
-        return new PaymentPageDetails(generateOrder(), generatePageCustomization());
+    public PaymentPageDetailsJson generatePaymentPageDetails() {
+        return new PaymentPageDetailsJson(generateOrder(), generatePageCustomization());
     }
 
-    private Order generateOrder() {
-        return Order.builder()
+    private OrderJson generateOrder() {
+        return OrderJson.builder()
                 .orderId(randomUUID().toString())
                 .amount(faker.number().numberBetween(1000, 2000))
                 .currency("EUR")
@@ -54,12 +54,12 @@ public class TestDataStorage {
                 .build();
     }
 
-    private OrderMetadata generateOrderMetadata() {
-        return new OrderMetadata("NY2018", "123989");
+    private OrderMetadataJson generateOrderMetadata() {
+        return new OrderMetadataJson("NY2018", "123989");
     }
 
-    private PageCustomization generatePageCustomization() {
-        return PageCustomization.builder()
+    private PageCustomizationJson generatePageCustomization() {
+        return PageCustomizationJson.builder()
                 .publicName(faker.company().name())
                 .orderTitle(faker.commerce().productName())
                 .orderDescription(faker.lorem().sentence())
