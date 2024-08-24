@@ -5,6 +5,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public record TransactionJson(@JsonProperty("status") String status,
-                              @JsonProperty("amount") Long amount,
+                              @JsonProperty("amount") int amount,
                               @JsonProperty("currency") String currency) {
 }

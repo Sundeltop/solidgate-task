@@ -11,7 +11,7 @@ import static com.fasterxml.jackson.annotation.JsonFormat.Shape.STRING;
 
 @Builder
 public record OrderJson(@JsonProperty("order_id") String orderId,
-                        @JsonProperty("amount") long amount,
+                        @JsonProperty("amount") int amount,
                         @JsonProperty("currency") String currency,
                         @JsonProperty("order_description") String orderDescription,
                         @JsonProperty("order_items") String orderItems,
