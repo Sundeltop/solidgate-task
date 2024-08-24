@@ -3,30 +3,20 @@ package com.example.service;
 import com.example.dto.request.PaymentPageDetailsJson;
 import com.example.dto.response.PaymentPageResultJson;
 import com.example.service.api.PaymentApi;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.SneakyThrows;
 import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.jackson.JacksonConverterFactory;
 
 import static com.example.config.ConfigManager.configuration;
 import static com.example.utils.SignatureGenerator.generateSignature;
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class PaymentService {
+public class PaymentService extends BaseService {
 
-    private final PaymentApi api;
-    private final ObjectMapper mapper;
+    private final PaymentApi api = retrofit.create(PaymentApi.class);
 
-    public PaymentService() {
-        final Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(configuration().apiPaymentPageEndpoint())
-                .addConverterFactory(JacksonConverterFactory.create())
-                .build();
-
-        mapper = new ObjectMapper();
-
-        api = retrofit.create(PaymentApi.class);
+    @Override
+    protected String url() {
+        return configuration().apiPaymentPageEndpoint();
     }
 
     @SneakyThrows
