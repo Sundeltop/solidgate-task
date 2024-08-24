@@ -20,4 +20,7 @@ public interface Configuration extends Config {
 
     @Key("api.payment.page.endpoint")
     String apiPaymentPageEndpoint();
+
+    @Key("api.pay.endpoint")
+    String apiPayEndpoint();
 }
