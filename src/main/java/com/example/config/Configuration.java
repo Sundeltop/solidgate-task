@@ -7,7 +7,8 @@ import static org.aeonbits.owner.Config.*;
 @LoadPolicy(LoadType.MERGE)
 @Sources({
         "system:properties",
-        "classpath:credentials.properties"
+        "classpath:credentials.properties",
+        "classpath:env.properties"
 })
 public interface Configuration extends Config {
 
@@ -16,4 +17,7 @@ public interface Configuration extends Config {
 
     @Key("secret.key")
     String secretKey();
+
+    @Key("api.payment.page.endpoint")
+    String apiPaymentPageEndpoint();
 }
