@@ -45,7 +45,7 @@ public class PaymentPageTest {
         final OrderStatusJson orderStatus = payService.checkOrderStatus(paymentPageDetails.getOrder().orderId());
 
         assertThat(orderStatus)
-                .extracting(status -> status.transactions().getTransactions().getFirst())
+                .extracting(status -> status.getTransactions().getFirst())
                 .returns(expectedCurrency, transaction -> Currency.getInstance(transaction.currency()).getSymbol())
                 .returns(expectedAmount, transaction -> convertOrderAmount(transaction.amount()))
                 .returns(EXPECTED_ORDER_SUCCESSFUL_STATUS, TransactionJson::status);
